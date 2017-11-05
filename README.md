@@ -1,19 +1,17 @@
 [![Build Status](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT.svg?branch=master)](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT)
 
-## Angular 2+ Frontent with SpringBoot (Java) Backend
+## SpringBoot (Java) Backend
 Application to demonstrate various parts of a service oriented RESTfull application. 
 
 ### Technology Stack
 Component         | Technology
 ---               | ---
-Frontend          | [Angular 4+](https://github.com/angular/angular)
 Backend (REST)    | [SpringBoot](https://projects.spring.io/spring-boot) (Java)
 Security          | Token Based (Spring Security and [JWT](https://github.com/auth0/java-jwt) )
 REST Documentation| [Swagger UI / Springfox](https://github.com/springfox/springfox) and [ReDoc](https://github.com/Rebilly/ReDoc)
 REST Spec         | [Open API Standard](https://www.openapis.org/) 
 In Memory DB      | H2 
 Persistence       | JPA (Using Spring Data)
-Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), Webpack, npm
 Server Build Tools| Maven(Java) or Gradle
 
 ## Folder Structure
@@ -36,28 +34,19 @@ PROJECT_FOLDER
 │     └──[public]
 │     └──[webui]         #webui folder is created by (maven/gradle) which copies webui/dist folder 
 │                        #the application.properties file list webui as a resource folder that means files can be accesses http://localhost/<files_inside_webui> 
-│
-└──[webui]
-   │  package.json     
-   │  angular-cli.json   #ng build configurations)
-   └──[node_modules]
-   └──[src]              #frontend source files
-   └──[dist]             #frontend build files, auto-created after running angular build: ng -build
+
 ```
 
 ## Prerequisites
 Ensure you have this installed before proceeding further
 - Java 8
 - Maven 3.3.9+ or Gradle 3.3+
-- Node 6.0 or above,  
-- npm 4 or above,   
-- Angular-cli 
+- Node 6.0 or above
 
 ## About
 This is an RESTfull implementation of an order processing app based on Northwind database schema from Microsoft.
 The goal of the project is to 
 - Highlight techniques of making and securing a REST full app using [SpringBoot](https://projects.spring.io/spring-boot)
-- How to consume an RESTfull service and make an HTML5 based Single Page App using [Angular 4+](https://github.com/angular/angular)
 
 ### Features of the Project
 * Backend
@@ -66,14 +55,6 @@ The goal of the project is to
   * In Memory DB with H2 
   * Using JPA and JDBC template to talk to relational database
   * How to request and respond for paginated data 
-
-* Frontend
-  * Organizing Components, Services, Directives, Pages etc in an Angular App
-  * How to chain RxJS Observables (by making sequntial AJAX request- its different that how you do with promises)
-  * Techniques to Lazy load Data (Infinite Scroll)
-  * Techniques to load large data set in a data-table but still keeping DOM footprint less
-  * Routing and guarding pages that needs authentication
-  * Basic visulaization
 
 * Build
   * How to build all in one app that includes (database, sample data, RESTfull API, Auto generated API Docs, frontend and security)
@@ -114,14 +95,6 @@ curl -X GET --header 'Accept: application/json' --header 'Authorization: xxx.xxx
 **As of this writing the Angular Frontend is adapted to make it work WITHOUT the security. If you enable the security you must update the frontend to store and send the security token with evry API request**
 
 
-### Install Frontend
-```bash
-# Navigate to PROJECT_FOLDER/webui (should cntain package.json )
-npm install
-# build the project (this will put the files under dist folder)
-ng build -prod --aot=false
-```
-
 ### Install Backend (SpringBoot Java)
 ```bash
 # Gradle Build : Navigate to the root folder where build.gradle is present 
@@ -133,7 +106,7 @@ gradle build
 mvn clean install
 ```
 
-### Start the API and WebUI server
+### Start the API server
 ```bash
 # Start the server (9119)
 # port and other configurations for API servere is in [./src/main/resources/application.properties](/src/main/resources/application.properties) file
@@ -148,7 +121,6 @@ java -jar ./target/app-1.0.0.jar
 ### Accessing Application
 Cpmponent         | URL                                      | Credentials
 ---               | ---                                      | ---
-Frontend          |  http://localhost:9119                   | `demo/demo`
 H2 Database       |  http://localhost:9119/h2-console        |  Driver:`org.h2.Driver` <br/> JDBC URL:`jdbc:h2:mem:demo` <br/> User Name:`sa`
 Swagger (API Ref) |  http://localhost:9119/swagger-ui.html   |
 Redoc (API Ref)   |  http://localhost:9119/redoc/index.html  |
@@ -166,31 +138,3 @@ after you get the authentication token you must provide this in the header for a
 ```bash
 curl -X GET --header 'Accept: application/json' --header 'Authorization: [replace this with token ]' 'http://localhost:9119/version'
 ```
-
-### Screenshots
-#### Login
-![Dashboard](/screenshots/login.png?raw=true)
----
-#### Dashboard - Order Stats
-![Dashboard](/screenshots/order_stats.png?raw=true)
----
-#### Dashboard - Product Stats
-![Dashboard](/screenshots/product_stats.png?raw=true)
----
-#### Orders
-![Dashboard](/screenshots/orders.png?raw=true)
----
-#### Orders Details
-![Dashboard](/screenshots/order_details.png?raw=true)
----
-#### Customers
-![Dashboard](/screenshots/customers.png?raw=true)
----
-#### API Docs - With Live Tryout
-![Dashboard](/screenshots/api_doc.png?raw=true)
----
-#### API Docs - For redability
-![Dashboard](/screenshots/api_doc2.png?raw=true)
----
-#### Database Schema
-![ER Diagram](/screenshots/db_schema.png?raw=true)
