@@ -6,6 +6,9 @@ import javax.servlet.http.*;
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.*;
@@ -69,6 +72,7 @@ public class CustomerController {
 
     @ApiOperation(value = "Delete a customer", response = OperationResponse.class)
     @RequestMapping(value = "/customers/{customerId}", method = RequestMethod.DELETE, produces = {"application/json"})
+    @PreAuthorize("hasRole('ADMIN')")
     public OperationResponse deleteCustomer(@PathVariable("customerId") Integer customerId, HttpServletRequest req) {
         OperationResponse resp = new OperationResponse();
         try {

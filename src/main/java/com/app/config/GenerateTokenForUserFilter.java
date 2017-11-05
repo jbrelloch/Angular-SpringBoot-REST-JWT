@@ -9,6 +9,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.apache.commons.io.IOUtils;
 import org.json.*;
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +77,9 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
         respItem.setLastName(tokenUser.getUser().getLastName());
         respItem.setUserId(tokenUser.getUser().getUserId());
         respItem.setEmail(tokenUser.getUser().getEmail());
+        ArrayList<String> roles = new ArrayList<String>();
+        roles.add(tokenUser.getRole());
+        respItem.setRoles(roles);
         respItem.setToken(tokenString);
 
         resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
